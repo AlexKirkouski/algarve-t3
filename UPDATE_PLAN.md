@@ -15,8 +15,21 @@
 
 ## 2. Источники и обход блокировок
 - **idealista.pt** — DataDome. Брать только **headful Chrome на :0** + persistent profile (`.idealista-profile`) + **новая вкладка на каждый URL** (иначе detached-frame). Капчу решаешь 1 раз. НИКОГДА не парсить idealista из субагентов/WebFetch — словишь бан.
+- ⚠️ **Даже headful — НЕ батч-скрейпить пачку idealista-страниц подряд автоматически** (быстрые навигации + свежие вкладки триггерят DataDome → «Foi detetado um uso indevido. O acesso foi bloqueado»). Урок 2026-05-30: автоскрейп 13 объявлений подряд получил блок на ~4-м. Только по 1-2 страницы вручную, по-человечески, с паузами; нужные поля лучше брать из УЖЕ сохранённого `t3_detail.json`/`search.json`, а не дёргать сайт заново.
 - **Поиск** новых: субагенты через **WebSearch** (idealista из поиска видно без захода на сайт) + порталы imovirtual, casa.sapo, supercasa, green-acres, idealista-альтернативы, агентские сайты, OLX/соцсети. Их страницы субагенты открывают свободно.
 - Бот-защищённые не-idealista сайты (iad и т.п.) — тоже **headful**.
+
+### 2.1 Полная карта каналов (в PT нет единой MLS — листинги фрагментированы, одна квартира висит на 5 порталах с разной ценой, часть off-market). Проверять несколько источников.
+- **Главные порталы (нац.):** idealista.pt (лидер, ~6.6M визитов/мес, есть RU/EN) · imovirtual.com (#2, OLX Group, даёт €/м²) · **Casa Sapo (casa.sapo.pt) = SuperCasa (supercasa.pt)** — одна база под двумя брендами (Janela Digital/Media Capital) · remax.pt (#3, портал+сеть).
+- **Для иностранцев / EN:** green-acres.pt · kyero.com · idealista EN/FR/DE · Properstar · JamesEdition (люкс) · Rightmove Overseas · A Place in the Sun · Pure Portugal (сельское/руины).
+- **Классифайды (без комиссии, от собственника):** OLX.pt · Custo Justo (custojusto.pt) · Facebook Marketplace + FB-группы Алгарве («Algarve Property», экспат-группы) · Imovendo (FSBO с раскидкой по порталам).
+- **Агентские сети (эксклюзивы ДО порталов):** RE/MAX, ERA, Century 21, KW, IAD, Zome, Coldwell Banker, Decisões e Soluções. Люкс: Engel & Völkers, Savills, Knight Frank, Sotheby's, Fine & Country, Porta da Frente Christie's, Quintela e Penalva. Локальные по Алгарве: Vendici, **Garvetur**, QP Savills, Fine Algarve.
+- **Банковская/залоговая (бывает дешевле рынка):** caixaimobiliario.pt · Millennium bcp · Santander · Novo Banco · BPI Expresso Imobiliário · сервисеры Whitestar/Norfin, Servdebt, doMii.
+- **Аукционы/госпродажи:** e-leiloes.pt (судебные) · Autoridade Tributária / Portal das Finanças (налоговые vendas) · частные leiloeiras.
+- **Новостройки напрямую:** сайты застройщиков + разделы «empreendimentos» на idealista/imovirtual. По району: Vilamoura World, Infraquinta + конкретные проекты (Eriluc, Terracota, Serenity и т.д.).
+- **Агрегаторы/метапоиск:** Nestoria, Mitula/Lifull, Trovit, Properstar; **Casafari** (B2B, для агентов).
+- **Офлайн/локально (в Алгарве реально работают):** вывески «Vende-se» на домах, витрины агентств, локальная пресса (Jornal/Postal do Algarve, Portugal Resident, Algarve Daily News), нотариусы, админы кондоминиумов, сарафан. Премиум Golden Triangle часто закрывается off-market.
+- **Минимальный охват без дыр:** idealista + imovirtual + Casa Sapo/SuperCasa + green-acres/kyero + прямой контакт 3-4 локальных агентств по Quarteira/Almancil/Vilamoura (ловить эксклюзивы до публикации).
 
 ## 3. Конвейер (порядок скриптов)
 1. `interactive2.cjs` — скрейп idealista-empreendimentos (таблица юнитов, цена из `<strong>`).
