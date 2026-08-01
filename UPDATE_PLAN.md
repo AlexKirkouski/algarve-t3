@@ -116,6 +116,13 @@
 ## 9. Файлы-данные (реестры для реюза/обновления)
 `final_rows.json` (база) · `curation.json` (дизайн/тип/picks) · `enrichment.json` (удобства/заметки) · `descriptions*.json` · `coords.json`/`coordfix.json` · `area.json` · `yearguess.json` · `added.json` · `scores.json`.
 
+## 9.1 Аренда (вторая база, `rent.html`)
+- **Канонический поиск idealista** (та же нарисованная зона): `https://www.idealista.pt/areas/arrendar-casas/com-preco-max_2700,t3,t4-t5/?shape=<тот же shape>` — пагинация `pagina-N` (без `.htm`). На 2026-08-01 отдаёт 34 карточки (2 стр.).
+- **Критерии включения:** T3 · ≤2700 €/мес · **только долгосрочная** (`term=long`). Отсекать: winter/сезон («de Outubro até Maio», «setembro 2026 a junho 2027»), «curta duração», «férias», «alojamento local», «por semana». Энергокласс/год **не фильтруются** (рынок аренды тонкий) — но показываются.
+- **Файлы:** `rent_ids.json` (карточки поиска, ключ = id) · `rent_detail_out.json` (desc/energy/year/lat/lng) · `DESIGN`-словарь + не-idealista `NON[]` прямо в `gen_rent.py` · фото в `images/rent/<id>/N.jpg` (до 10, ужаты 1000px) · `rent_archive.json` (снятые).
+- **Конвейер:** `gen_rent.py` (→ `final_rent.json`) → `gen_rent_full.py` (→ `algarve-t3-rent.html`). Обе сборки теперь внутри `publish.sh`, файл кладётся в `deploy/rent.html`.
+- Снятое объявление удалять из `cards`/`det` и класть в `rent_archive.json` (иначе `gen_rent.py` его воскресит).
+
 ## 10. Публикация / обновление сайта (ОБЯЗАТЕЛЬНО после каждого обновления базы)
 - **Сайт:** https://alexkirkouski.github.io/algarve-t3/ · **репо:** github.com/AlexKirkouski/algarve-t3 (public, GitHub Pages, ветка `main`, папка `/`, `.nojekyll`).
 - **Правило:** после ЛЮБОГО изменения базы (добавление/дедуп/верификация/правки полей) — **переопубликовать**, иначе по ссылке останется старое. Колонка «Добавл.» показывает, что нового с прошлой публикации.
