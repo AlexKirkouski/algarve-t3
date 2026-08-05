@@ -3,8 +3,8 @@
 ## 0. Что это
 Интерактивная база подборки **T3-квартир/домов** в Algarve (Quarteira · Vilamoura · Almancil · Loulé), бюджет ≤1 000 000 €, энергокласс A/A+/B, постройка 2015+ или новостройка, желательно с гаражом/паркингом.
 Итог — самодостаточный `algarve-t3-final.html`: карта, топ-подборки по критериям, полный список со score/rank, фото, описания, живые слайдеры весов.
-**Текущий объём: 83 объекта** (62 idealista + 21 не-idealista), на 2026-08-01.
-Раунд 2026-08-01: пересканирован канонический поиск idealista (214 результатов, 8 стр.) → 5 действительно новых T3; после фото-дедупа и проверки года добавлено 2 (35148400 Canais do Golfe 860k A; 35205076 penthouse 2023 Vilamoura 985k A), 3 отклонено (старые дома без года). Снято/404 — 4 idealista (34754210, 34808833, 34989632, 35035667) + ext29 ERILUC (все источники сняты) → `archive.json`. Обновлено 14 цен. Свип не-idealista (imovirtual/casa.sapo/supercasa/green-acres/kyero/remax) — новых подходящих нет (Vilamoura Lakes = уже 34077497, Oak35 2.4M, Jasmine Pearl = n2_8).
+**Текущий объём: 83 объекта** (62 idealista + 21 не-idealista), на 2026-08-05.
+Раунд 2026-08-05: пересканирован канонический поиск idealista (214 результатов, 8 стр.) → 5 действительно новых T3; после фото-дедупа и проверки года добавлено 2 (35148400 Canais do Golfe 860k A; 35205076 penthouse 2023 Vilamoura 985k A), 3 отклонено (старые дома без года). Снято/404 — 4 idealista (34754210, 34808833, 34989632, 35035667) + ext29 ERILUC (все источники сняты) → `archive.json`. Обновлено 14 цен. Свип не-idealista (imovirtual/casa.sapo/supercasa/green-acres/kyero/remax) — новых подходящих нет (Vilamoura Lakes = уже 34077497, Oak35 2.4M, Jasmine Pearl = n2_8).
 Раунд 2026-05-30: проверено ~30 кандидатов, 3 добавлено (GREENS, Oliveiras Residence, Varandas do Barrocal), 3 оказались дублями по фото-хэшу (Edifício Parque=34994589, Nobilus=34956196, Olivais Prestige=ext17).
 
 ## 1. Жёсткие критерии (фильтр включения)
@@ -117,7 +117,7 @@
 `final_rows.json` (база) · `curation.json` (дизайн/тип/picks) · `enrichment.json` (удобства/заметки) · `descriptions*.json` · `coords.json`/`coordfix.json` · `area.json` · `yearguess.json` · `added.json` · `scores.json`.
 
 ## 9.1 Аренда (вторая база, `rent.html`)
-- **Канонический поиск idealista** (та же нарисованная зона): `https://www.idealista.pt/areas/arrendar-casas/com-preco-max_2700,t3,t4-t5/?shape=<тот же shape>` — пагинация `pagina-N` (без `.htm`). На 2026-08-01 отдаёт 34 карточки (2 стр.).
+- **Канонический поиск idealista** (та же нарисованная зона): `https://www.idealista.pt/areas/arrendar-casas/com-preco-max_2700,t3,t4-t5/?shape=<тот же shape>` — пагинация `pagina-N` (без `.htm`). На 2026-08-05 отдаёт 34 карточки (2 стр.).
 - **Критерии включения:** T3 · ≤2700 €/мес · **только долгосрочная** (`term=long`). Отсекать: winter/сезон («de Outubro até Maio», «setembro 2026 a junho 2027»), «curta duração», «férias», «alojamento local», «por semana». Энергокласс/год **не фильтруются** (рынок аренды тонкий) — но показываются.
 - **Файлы:** `rent_ids.json` (карточки поиска, ключ = id) · `rent_detail_out.json` (desc/energy/year/lat/lng) · `DESIGN`-словарь + не-idealista `NON[]` прямо в `gen_rent.py` · фото в `images/rent/<id>/N.jpg` (до 10, ужаты 1000px) · `rent_archive.json` (снятые).
 - **Конвейер:** `gen_rent.py` (→ `final_rent.json`) → `gen_rent_full.py` (→ `algarve-t3-rent.html`). Обе сборки теперь внутри `publish.sh`, файл кладётся в `deploy/rent.html`.
